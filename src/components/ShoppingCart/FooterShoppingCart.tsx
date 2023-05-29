@@ -1,5 +1,5 @@
 'use client'
-import { useShoppingCart } from '@/hooks/useShopppingCart'
+import { useShoppingCart } from '@/hooks/useShoppingCart'
 import { priceFormatted } from '@/services/priceFormatted'
 import Image from 'next/image'
 import { ButtonRectangle } from '../ButtonRectangle'

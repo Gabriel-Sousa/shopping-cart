@@ -1,6 +1,6 @@
 'use client'
 
-import { useShoppingCart } from '@/hooks/useShopppingCart'
+import { useShoppingCart } from '@/hooks/useShoppingCart'
 import Image from 'next/image'
 
 interface HeaderShoppingCartProps {

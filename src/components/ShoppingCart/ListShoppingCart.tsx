@@ -1,5 +1,5 @@
 'use client'
-import { useShoppingCart } from '@/hooks/useShopppingCart'
+import { useShoppingCart } from '@/hooks/useShoppingCart'
 import { ItemShoppingCart } from './ItemShoppingCart'
 
 export function ListShoppingCart() {

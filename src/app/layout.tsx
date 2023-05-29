@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import './globals.css'
 import { Inter } from 'next/font/google'
-import { ShoppingCartProvider } from '@/hooks/useShopppingCart'
+import { ShoppingCartProvider } from '@/hooks/useShoppingCart'
 
 const inter = Inter({ subsets: ['latin'] })
 

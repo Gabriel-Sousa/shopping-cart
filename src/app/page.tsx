@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { priceFormatted } from '@/services/priceFormatted'
 import { ButtonRectangle } from '@/components/ButtonRectangle'
 import { ShoppingCart } from '@/components/ShoppingCart'
-import { useShoppingCart } from '@/hooks/useShopppingCart'
+import { useShoppingCart } from '@/hooks/useShoppingCart'
 
 export default function Home() {
   const products = [

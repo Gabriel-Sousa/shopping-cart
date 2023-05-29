@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { priceFormatted } from '@/services/priceFormatted'
-import { useShoppingCart } from '@/hooks/useShopppingCart'
+import { useShoppingCart } from '@/hooks/useShoppingCart'
 import { ButtonSquare } from './ButtonSquare'
 
 type Product = {
