@@ -11,7 +11,7 @@ export default function Home() {
     {
       id: '45eb77d1-768d-4f1a-85ce-172375dec3c4',
       title: 'Cadeira Gamer  RGB - Preta com Iluminação (Led)',
-      imageCover: 'http://localhost:3000/assets/product-image-cadeira.jpg',
+      imageCover: `/assets/product-image-cadeira.jpg`,
       stockAmount: 19,
       price: 49900,
       amount: 19,
@@ -19,7 +19,7 @@ export default function Home() {
     {
       id: '467a1372-d6d5-4879-8923-ff76bec44ac5',
       title: 'Headset Gamer RGB Preto',
-      imageCover: 'http://localhost:3000/assets/product-image-headset.jpg',
+      imageCover: `/assets/product-image-headset.jpg`,
       stockAmount: 10,
       price: 28354,
       amount: 1,
@@ -28,7 +28,7 @@ export default function Home() {
       id: 'fe775c07-ed11-4c96-b134-93fd42303fc1',
       title:
         'Monitor Gamer Curvo 49 DQHD, 240Hz, 1ms, HDMI e DisplayPort, HDR 1000, FreeSync Premium, Ajuste de Altura - LC49G95TSSLXZD',
-      imageCover: 'http://localhost:3000/assets/product-image-monitor.jpg',
+      imageCover: `/assets/product-image-monitor.jpg`,
       stockAmount: 13,
       price: 135048,
       amount: 1,
@@ -36,7 +36,7 @@ export default function Home() {
     {
       id: '03ef7514-f6af-4390-9908-6700af1b79e9',
       title: 'Patinho De Borracha Para Banho',
-      imageCover: 'http://localhost:3000/assets/product-image-patinho.jpg',
+      imageCover: `/assets/product-image-patinho.jpg`,
       stockAmount: 8,
       price: 12598,
       amount: 1,
@@ -44,7 +44,7 @@ export default function Home() {
     {
       id: '34ebbb11-b5d8-40a0-b614-bf0c1aab70a9',
       title: 'Teclado Gamer Mecânico Low Profile RGB AW510K 580',
-      imageCover: 'http://localhost:3000/assets/product-image-teclado.jpg',
+      imageCover: `/assets/product-image-teclado.jpg`,
       stockAmount: 7,
       price: 35099,
       amount: 1,
