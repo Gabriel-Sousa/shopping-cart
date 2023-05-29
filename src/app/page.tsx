@@ -1,113 +1,97 @@
+'use client'
+
 import Image from 'next/image'
+import { priceFormatted } from '@/services/priceFormatted'
+import { ButtonRectangle } from '@/components/ButtonRectangle'
+import { ShoppingCart } from '@/components/ShoppingCart'
+import { useShoppingCart } from '@/hooks/useShopppingCart'
 
 export default function Home() {
+  const products = [
+    {
+      id: '45eb77d1-768d-4f1a-85ce-172375dec3c4',
+      title: 'Cadeira Gamer  RGB - Preta com Iluminação (Led)',
+      imageCover: 'http://localhost:3000/assets/product-image-cadeira.jpg',
+      stockAmount: 19,
+      price: 49900,
+      amount: 19,
+    },
+    {
+      id: '467a1372-d6d5-4879-8923-ff76bec44ac5',
+      title: 'Headset Gamer RGB Preto',
+      imageCover: 'http://localhost:3000/assets/product-image-headset.jpg',
+      stockAmount: 10,
+      price: 28354,
+      amount: 1,
+    },
+    {
+      id: 'fe775c07-ed11-4c96-b134-93fd42303fc1',
+      title:
+        'Monitor Gamer Curvo 49 DQHD, 240Hz, 1ms, HDMI e DisplayPort, HDR 1000, FreeSync Premium, Ajuste de Altura - LC49G95TSSLXZD',
+      imageCover: 'http://localhost:3000/assets/product-image-monitor.jpg',
+      stockAmount: 13,
+      price: 135048,
+      amount: 1,
+    },
+    {
+      id: '03ef7514-f6af-4390-9908-6700af1b79e9',
+      title: 'Patinho De Borracha Para Banho',
+      imageCover: 'http://localhost:3000/assets/product-image-patinho.jpg',
+      stockAmount: 8,
+      price: 12598,
+      amount: 1,
+    },
+    {
+      id: '34ebbb11-b5d8-40a0-b614-bf0c1aab70a9',
+      title: 'Teclado Gamer Mecânico Low Profile RGB AW510K 580',
+      imageCover: 'http://localhost:3000/assets/product-image-teclado.jpg',
+      stockAmount: 7,
+      price: 35099,
+      amount: 1,
+    },
+  ]
+
+  const { addItemShoppingCart } = useShoppingCart()
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <div className="flex h-screen   items-center justify-center bg-[#09090B] text-gray-200">
+        <div className="flex flex-wrap  justify-center  gap-6 p-6">
+          {products.map((product) => {
+            const title = product.title.substring(0, 40)
+            const withElipse = product.title.length > 40
+
+            return (
+              <div
+                key={product.id}
+                className="flex w-[240px] flex-col gap-4 rounded-lg bg-gray-500 p-4"
+              >
+                <Image
+                  src={product.imageCover}
+                  alt=""
+                  width={256}
+                  height={256}
+                  className="rounded-lg"
+                />
+                <h2 title={product.title} className="h-[48px]">
+                  {title}
+                  <span>{withElipse && '...'}</span>
+                </h2>
+                <div className="text-xl font-bold leading-6">
+                  {priceFormatted(product.price)}
+                </div>
+                <ButtonRectangle
+                  title="Adicionar ao carrinho"
+                  onClick={() => addItemShoppingCart(product)}
+                />
+              </div>
+            )
+          })}
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="">
+        <ShoppingCart />
       </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </>
   )
 }

@@ -2,26 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+
+.shoppingCartScroll::-webkit-scrollbar {
+  width: 8px; /* Largura da barra de rolagem */
+  background-color: #09090B;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.shoppingCartScroll::-webkit-scrollbar-thumb {
+  background-color: #3F3F46; 
+  border-radius: 8px; 
+}
+
+.shoppingCartScroll::-webkit-scrollbar-thumb:hover {
+  background-color: #4a4a4f;
+}
+
+@keyframes open {
+  from {
+    transform: translateX(93%);
+  }
+  to {
+    transform: translateX(0);
   }
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@keyframes close {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(93%);
+  }
 }
+.close{
+  animation-name: close;
+  animation-duration: 1s;
+}
+.open{
+  animation-name: open;
+  animation-duration: 1s;
+}
+
