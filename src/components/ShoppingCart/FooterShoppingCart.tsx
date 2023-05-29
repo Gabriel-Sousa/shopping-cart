@@ -38,7 +38,6 @@ export function FooterShoppingCart() {
     const isCouponValid = coupons.find(
       (coupon) => coupon.name === upperCaseCouponInput,
     )
-
     if (isCouponValid) {
       setDiscount(isCouponValid.discount)
     }
@@ -70,7 +69,13 @@ export function FooterShoppingCart() {
               autoComplete="off"
             />
             {!!onBlur && (
-              <button onClick={() => setOnBlur(false)} className="relative ">
+              <button
+                onClick={() => {
+                  setOnBlur(false)
+                  setDiscount(0)
+                }}
+                className="relative "
+              >
                 x
               </button>
             )}
