@@ -1,6 +1,12 @@
 'use client'
 
-import { createContext, ReactNode, useContext, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 
 type Product = {
   id: string
@@ -24,20 +30,15 @@ interface ShoppingCartProviderProp {
 export const ShoppingCartContext = createContext({} as ShoppingCartContextData)
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProp) {
-  const [productShoppingCart, setProductShoppingCart] = useState<Product[]>(
-    () => {
-      const storedStateAsJSON = localStorage.getItem(
-        '@shopping:cart-state-1.0.0',
-      )
+  useEffect(() => {
+    const storedStateAsJSON = localStorage.getItem('@shopping:cart-state-1.0.0')
 
-      if (storedStateAsJSON) {
-        console.log(storedStateAsJSON)
-        return JSON.parse(storedStateAsJSON)
-      }
+    if (storedStateAsJSON) {
+      setProductShoppingCart(JSON.parse(storedStateAsJSON))
+    }
+  }, [])
 
-      return [] as Product[]
-    },
-  )
+  const [productShoppingCart, setProductShoppingCart] = useState<Product[]>([])
 
   function addItemShoppingCart(product: Product) {
     const isProductAlreadyInCart = productShoppingCart.filter(
