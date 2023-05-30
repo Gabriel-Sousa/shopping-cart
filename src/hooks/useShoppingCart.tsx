@@ -7,6 +7,7 @@ import {
   useEffect,
   useState,
 } from 'react'
+import { toast } from 'react-toastify'
 
 type Product = {
   id: string
@@ -53,6 +54,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProp) {
       if (
         isProductAlreadyInCart.amount! >= isProductAlreadyInCart.stockAmount
       ) {
+        toast.error('O produto foi adicionado em sua totalidade ao carrinho.')
         return
       }
 
@@ -92,6 +94,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProp) {
 
     setProductsInCart(() => {
       saveLocalStorageProductInCart(updatedProductInCart)
+      toast.error('Produto removido.')
       return updatedProductInCart
     })
   }
@@ -101,6 +104,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProp) {
 
     if (isProductInCart) {
       if (isProductInCart.amount! >= isProductInCart.stockAmount) {
+        toast.error('O produto foi adicionado em sua totalidade ao carrinho.')
+
         return
       }
     }
@@ -126,6 +131,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProp) {
 
     if (isProductInCart) {
       if (isProductInCart.amount! <= 1) {
+        toast.error(
+          'A quantidade mínima é 1. Se desejar remove o produto, clique no ícone da lixeira para remover o produto do carrinho.',
+        )
         return
       }
     }

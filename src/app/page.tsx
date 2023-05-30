@@ -1,10 +1,14 @@
 'use client'
 
 import Image from 'next/image'
+
 import { priceFormatted } from '@/services/priceFormatted'
 import { ButtonRectangle } from '@/components/ButtonRectangle'
 import { ShoppingCart } from '@/components/ShoppingCart'
 import { useShoppingCart } from '@/hooks/useShoppingCart'
+import { ToastContainer } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function Home() {
   const products = [
@@ -88,6 +92,19 @@ export default function Home() {
       <div className="">
         <ShoppingCart />
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        limit={5}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </>
   )
 }

@@ -4,6 +4,7 @@ import { priceFormatted } from '@/services/priceFormatted'
 import Image from 'next/image'
 import { ButtonRectangle } from '../ButtonRectangle'
 import { KeyboardEvent, useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 export function FooterShoppingCart() {
   const { productsInCart } = useShoppingCart()
@@ -44,6 +45,7 @@ export function FooterShoppingCart() {
 
     if (isCouponValid) {
       setDiscount(isCouponValid.discount)
+      toast.success('Desconto aplicado!')
     }
   }
 
@@ -86,6 +88,7 @@ export function FooterShoppingCart() {
                 onClick={() => {
                   setInputDiscount('')
                   setDiscount(0)
+                  toast.error('Desconto removido.')
                 }}
                 className="relative"
               >
