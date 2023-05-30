@@ -3,43 +3,53 @@ import { useShoppingCart } from '@/hooks/useShoppingCart'
 import { priceFormatted } from '@/services/priceFormatted'
 import Image from 'next/image'
 import { ButtonRectangle } from '../ButtonRectangle'
-import { useEffect, useState } from 'react'
+import { KeyboardEvent, useEffect, useState } from 'react'
 
 export function FooterShoppingCart() {
-  const { productShoppingCart } = useShoppingCart()
+  const { productsInCart } = useShoppingCart()
   const [isInputClicked, setIsInputClicked] = useState(false)
+  const [inputDiscount, setInputDiscount] = useState('')
   const [discount, setDiscount] = useState(0)
   const [total, setTotal] = useState(0)
-  const [onBlur, setOnBlur] = useState(false)
 
   useEffect(() => {
     function calculateAllProducts() {
-      return productShoppingCart.reduce((acc, product) => {
-        return acc + product.price * product.amount
+      return productsInCart.reduce((acc, product) => {
+        return acc + product.price * product.amount!
       }, 0)
     }
 
     const total = calculateAllProducts()
-
     if (discount) {
       setTotal(total - (total * discount) / 100)
     } else {
       setTotal(total)
     }
-  }, [discount, productShoppingCart])
+  }, [discount, productsInCart])
 
   const coupons = [
     { name: 'FREE', discount: 100 },
     { name: '10%', discount: 10 },
+    { name: '50%', discount: 50 },
+    { name: '55%', discount: 55 },
+    { name: '75%', discount: 75 },
+    { name: '90%', discount: 90 },
   ]
 
-  function getDiscount(couponInput: HTMLInputElement) {
-    const upperCaseCouponInput = couponInput.value.toUpperCase()
+  function getDiscount() {
+    const upperCaseCouponInput = inputDiscount.toUpperCase()
     const isCouponValid = coupons.find(
       (coupon) => coupon.name === upperCaseCouponInput,
     )
+
     if (isCouponValid) {
       setDiscount(isCouponValid.discount)
+    }
+  }
+
+  function handleKeyDown(event: KeyboardEvent<HTMLElement>) {
+    if (event.key === 'Enter') {
+      getDiscount()
     }
   }
 
@@ -57,24 +67,27 @@ export function FooterShoppingCart() {
             ${isInputClicked && 'border-b-2 border-violet-500'}`}
           >
             <input
-              placeholder="Adicionar cupom"
-              name="cupom"
               className={`w-36 bg-gray-500 p-1 text-left text-gray-200 placeholder:text-violet-400 focus:outline-none 
             `}
+              placeholder="Adicionar cupom"
+              name="cupom"
+              disabled={!!discount}
+              value={inputDiscount}
+              onChange={(e) => setInputDiscount(e.target.value)}
               onClick={() => setIsInputClicked(true)}
-              onBlur={(e) => {
-                e.target.value !== '' && getDiscount(e.target)
-                e.target.value !== '' && setOnBlur(true)
+              onBlur={() => {
+                inputDiscount.length >= 3 && getDiscount()
               }}
+              onKeyDown={handleKeyDown}
               autoComplete="off"
             />
-            {!!onBlur && (
+            {!!inputDiscount && (
               <button
                 onClick={() => {
-                  setOnBlur(false)
+                  setInputDiscount('')
                   setDiscount(0)
                 }}
-                className="relative "
+                className="relative"
               >
                 x
               </button>

@@ -14,7 +14,6 @@ export default function Home() {
       imageCover: `/assets/product-image-cadeira.jpg`,
       stockAmount: 19,
       price: 49900,
-      amount: 19,
     },
     {
       id: '467a1372-d6d5-4879-8923-ff76bec44ac5',
@@ -31,7 +30,6 @@ export default function Home() {
       imageCover: `/assets/product-image-monitor.jpg`,
       stockAmount: 13,
       price: 135048,
-      amount: 1,
     },
     {
       id: '03ef7514-f6af-4390-9908-6700af1b79e9',
@@ -39,7 +37,6 @@ export default function Home() {
       imageCover: `/assets/product-image-patinho.jpg`,
       stockAmount: 8,
       price: 12598,
-      amount: 1,
     },
     {
       id: '34ebbb11-b5d8-40a0-b614-bf0c1aab70a9',
@@ -47,11 +44,10 @@ export default function Home() {
       imageCover: `/assets/product-image-teclado.jpg`,
       stockAmount: 7,
       price: 35099,
-      amount: 1,
     },
   ]
 
-  const { addItemShoppingCart } = useShoppingCart()
+  const { addItemInShoppingCart } = useShoppingCart()
 
   return (
     <>
@@ -82,7 +78,7 @@ export default function Home() {
                 </div>
                 <ButtonRectangle
                   title="Adicionar ao carrinho"
-                  onClick={() => addItemShoppingCart(product)}
+                  onClick={() => addItemInShoppingCart(product)}
                 />
               </div>
             )

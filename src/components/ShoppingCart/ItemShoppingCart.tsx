@@ -11,7 +11,7 @@ type Product = {
   imageCover: string
   stockAmount: number
   price: number
-  amount: number
+  amount?: number
 }
 
 interface ItemShoppingCartProps {
@@ -19,19 +19,19 @@ interface ItemShoppingCartProps {
 }
 
 export function ItemShoppingCart({ product }: ItemShoppingCartProps) {
-  const { addItemShoppingCart, removeItemShoppingCart, deleteProductInCart } =
+  const { addAmount, removeAmount, removeItemInShoppingCart } =
     useShoppingCart()
 
   function handleAddAmount() {
-    addItemShoppingCart(product)
+    addAmount(product.id)
   }
 
   function handleRemoveAmount() {
-    removeItemShoppingCart(product)
+    removeAmount(product.id)
   }
 
   function handleDelete() {
-    deleteProductInCart(product)
+    removeItemInShoppingCart(product.id)
   }
 
   return (

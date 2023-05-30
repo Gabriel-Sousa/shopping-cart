@@ -14,14 +14,15 @@ type Product = {
   imageCover: string
   stockAmount: number
   price: number
-  amount: number
+  amount?: number
 }
 
 interface ShoppingCartContextData {
-  productShoppingCart: Product[]
-  addItemShoppingCart: (product: Product) => void
-  removeItemShoppingCart: (product: Product) => void
-  deleteProductInCart: (product: Product) => void
+  productsInCart: Product[]
+  addItemInShoppingCart: (product: Product) => void
+  removeItemInShoppingCart: (id: string) => void
+  addAmount: (id: string) => void
+  removeAmount: (id: string) => void
 }
 
 interface ShoppingCartProviderProp {
@@ -31,99 +32,128 @@ export const ShoppingCartContext = createContext({} as ShoppingCartContextData)
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProp) {
   useEffect(() => {
-    const storedStateAsJSON = localStorage.getItem('@shopping:cart-state-1.0.0')
+    const storedStateAsJSON = localStorage.getItem('@shopping:cart-state-1.1.0')
 
     if (storedStateAsJSON) {
-      setProductShoppingCart(JSON.parse(storedStateAsJSON))
+      setProductsInCart(JSON.parse(storedStateAsJSON))
     }
   }, [])
 
-  const [productShoppingCart, setProductShoppingCart] = useState<Product[]>([])
+  const [productsInCart, setProductsInCart] = useState<Product[]>([])
 
-  function addItemShoppingCart(product: Product) {
-    const isProductAlreadyInCart = productShoppingCart.filter(
-      (productCart) => productCart.id === product.id,
+  function saveLocalStorageProductInCart(products: Product[]) {
+    localStorage.setItem('@shopping:cart-state-1.1.0', JSON.stringify(products))
+  }
+
+  function addItemInShoppingCart(product: Product) {
+    const isProductAlreadyInCart = productsInCart.find(
+      (productInCart) => product.id === productInCart.id,
     )
-
-    if (isProductAlreadyInCart.length > 0) {
+    if (isProductAlreadyInCart) {
       if (
-        isProductAlreadyInCart[0].amount >=
-        isProductAlreadyInCart[0].stockAmount
+        isProductAlreadyInCart.amount! >= isProductAlreadyInCart.stockAmount
       ) {
         return
       }
-      const listOfProductUpdated = productShoppingCart.map((oldProduct) => {
-        if (oldProduct.id === product.id) {
+
+      const newProductAmount = productsInCart.map((productInCart) => {
+        if (productInCart.id === product.id) {
           return {
-            ...oldProduct,
-            amount: oldProduct.amount + 1,
+            ...productInCart,
+            amount: productInCart.amount! + 1,
           }
         }
-        return oldProduct
+
+        return productInCart
       })
 
-      localStorage.setItem(
-        '@shopping:cart-state-1.0.0',
-        JSON.stringify(listOfProductUpdated),
-      )
-      setProductShoppingCart(listOfProductUpdated)
-    } else {
-      setProductShoppingCart((state) => {
-        localStorage.setItem(
-          '@shopping:cart-state-1.0.0',
-          JSON.stringify([...state, product]),
-        )
-
-        return [...state, product]
+      setProductsInCart(() => {
+        saveLocalStorageProductInCart(newProductAmount)
+        return newProductAmount
       })
+      return
     }
+
+    const addAmountProduct = {
+      ...product,
+      amount: 1,
+    }
+
+    setProductsInCart((state) => {
+      saveLocalStorageProductInCart([...state, addAmountProduct])
+      return [...state, addAmountProduct]
+    })
   }
 
-  function removeItemShoppingCart(product: Product) {
-    const productIsInCart = productShoppingCart.filter(
-      (productCart) => productCart.id === product.id,
+  function removeItemInShoppingCart(id: string) {
+    const updatedProductInCart = productsInCart.filter(
+      (productInCart) => productInCart.id !== id,
     )
 
-    if (productIsInCart.length > 0) {
-      if (productIsInCart[0].amount === 1) {
+    setProductsInCart(() => {
+      saveLocalStorageProductInCart(updatedProductInCart)
+      return updatedProductInCart
+    })
+  }
+
+  function addAmount(id: string) {
+    const isProductInCart = productsInCart.find((product) => product.id === id)
+
+    if (isProductInCart) {
+      if (isProductInCart.amount! >= isProductInCart.stockAmount) {
         return
       }
-      const listOfProductUpdated = productShoppingCart.map((oldProduct) => {
-        if (oldProduct.id === product.id) {
-          return {
-            ...oldProduct,
-            amount: oldProduct.amount - 1,
-          }
-        }
-        return oldProduct
-      })
-      localStorage.setItem(
-        '@shopping:cart-state-1.0.0',
-        JSON.stringify(listOfProductUpdated),
-      )
-      setProductShoppingCart(listOfProductUpdated)
     }
+
+    const updatedAmount = productsInCart.map((productInCart) => {
+      if (productInCart.id === id) {
+        return {
+          ...productInCart,
+          amount: productInCart.amount! + 1,
+        }
+      }
+      return productInCart
+    })
+
+    setProductsInCart(() => {
+      saveLocalStorageProductInCart(updatedAmount)
+      return updatedAmount
+    })
   }
 
-  function deleteProductInCart(product: Product) {
-    const removedProduct = productShoppingCart.filter(
-      (oldProduct) => product.id !== oldProduct.id,
-    )
+  function removeAmount(id: string) {
+    const isProductInCart = productsInCart.find((product) => product.id === id)
 
-    localStorage.setItem(
-      '@shopping:cart-state-1.0.0',
-      JSON.stringify(removedProduct),
-    )
-    setProductShoppingCart(removedProduct)
+    if (isProductInCart) {
+      if (isProductInCart.amount! <= 1) {
+        return
+      }
+    }
+
+    const updatedAmount = productsInCart.map((productInCart) => {
+      if (productInCart.id === id) {
+        return {
+          ...productInCart,
+          amount: productInCart.amount! - 1,
+        }
+      }
+      return productInCart
+    })
+
+    setProductsInCart(() => {
+      saveLocalStorageProductInCart(updatedAmount)
+      return updatedAmount
+    })
   }
 
   return (
     <ShoppingCartContext.Provider
       value={{
-        productShoppingCart,
-        addItemShoppingCart,
-        removeItemShoppingCart,
-        deleteProductInCart,
+        productsInCart,
+        addItemInShoppingCart,
+        removeItemInShoppingCart,
+        addAmount,
+        removeAmount,
       }}
     >
       {children}
