@@ -30,18 +30,20 @@ export function ButtonSquare({
       className={`rounded-lg border-2 p-2 
       transition-all 
 
-      ${variant === 'minus'
+      ${
+        variant === 'minus'
           ? currentAmount === 1
             ? 'cursor-not-allowed border-gray-400'
             : 'border-violet-400 hover:bg-violet-400'
           : ''
-        }
+      }
 
-        ${variant === 'plus'
-          ? currentAmount === maxAmount
-            ? 'cursor-not-allowed border-gray-400 '
-            : 'border-violet-400 hover:bg-violet-400'
-          : ''
+        ${
+          variant === 'plus'
+            ? currentAmount === maxAmount
+              ? 'cursor-not-allowed border-gray-400 '
+              : 'border-violet-400 hover:bg-violet-400'
+            : ''
         }
       
         `}
