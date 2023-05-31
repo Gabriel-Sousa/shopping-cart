@@ -22,7 +22,7 @@ export function ShoppingCart() {
         onClick={changeStateModal}
         className="relative h-8 w-8 translate-x-4 rotate-45 bg-[#414146]"
       />
-      <div className="relative flex h-screen w-[356px] flex-col bg-gray-500 sm:w-[480px]">
+      <div className="relative flex h-screen w-[356px] flex-col bg-gray-500 md:w-[480px]">
         <HeaderShoppingCart onCloseModal={changeStateModal} />
         <ListShoppingCart />
         <FooterShoppingCart />
