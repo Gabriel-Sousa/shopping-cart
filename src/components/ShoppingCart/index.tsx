@@ -3,15 +3,10 @@
 import { FooterShoppingCart } from '@/components/ShoppingCart/FooterShoppingCart'
 import { HeaderShoppingCart } from '@/components/ShoppingCart/HeaderShoppingCart'
 import { ListShoppingCart } from '@/components/ShoppingCart/ListShoppingCart'
-import { useState } from 'react'
+import { useShoppingCart } from '@/hooks/useShoppingCart'
 
 export function ShoppingCart() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  function changeStateModal() {
-    setIsModalOpen((state) => !state)
-  }
-
+  const { isModalOpen, changeStateModal } = useShoppingCart()
   return (
     <div
       className={`fixed right-0 top-0 flex h-screen items-center justify-center text-gray-200

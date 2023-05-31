@@ -20,10 +20,12 @@ type Product = {
 
 interface ShoppingCartContextData {
   productsInCart: Product[]
+  isModalOpen: boolean
   addItemInShoppingCart: (product: Product) => void
   removeItemInShoppingCart: (id: string) => void
   addAmount: (id: string) => void
   removeAmount: (id: string) => void
+  changeStateModal: () => void
 }
 
 interface ShoppingCartProviderProp {
@@ -32,6 +34,9 @@ interface ShoppingCartProviderProp {
 export const ShoppingCartContext = createContext({} as ShoppingCartContextData)
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProp) {
+  const [productsInCart, setProductsInCart] = useState<Product[]>([])
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   useEffect(() => {
     const storedStateAsJSON = localStorage.getItem('@shopping:cart-state-1.1.0')
 
@@ -40,7 +45,14 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProp) {
     }
   }, [])
 
-  const [productsInCart, setProductsInCart] = useState<Product[]>([])
+  useEffect(() => {
+    const body = document.getElementById('body')
+    if (isModalOpen) {
+      body?.classList.add('overflow-hidden')
+    } else {
+      body?.classList.remove('overflow-hidden')
+    }
+  }, [isModalOpen])
 
   function saveLocalStorageProductInCart(products: Product[]) {
     localStorage.setItem('@shopping:cart-state-1.1.0', JSON.stringify(products))
@@ -154,14 +166,19 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProp) {
     })
   }
 
+  function changeStateModal() {
+    setIsModalOpen((state) => !state)
+  }
   return (
     <ShoppingCartContext.Provider
       value={{
         productsInCart,
+        isModalOpen,
         addItemInShoppingCart,
         removeItemInShoppingCart,
         addAmount,
         removeAmount,
+        changeStateModal,
       }}
     >
       {children}

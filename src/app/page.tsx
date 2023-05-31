@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { priceFormatted } from '@/services/priceFormatted'
 import { ButtonRectangle } from '@/components/ButtonRectangle'
 import { ShoppingCart } from '@/components/ShoppingCart'
-import { useShoppingCart } from '@/hooks/useShoppingCart'
+import { ShoppingCartProvider, useShoppingCart } from '@/hooks/useShoppingCart'
 import { ToastContainer } from 'react-toastify'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -54,7 +54,7 @@ export default function Home() {
   const { addItemInShoppingCart } = useShoppingCart()
 
   return (
-    <>
+    <ShoppingCartProvider>
       <div className="flex items-center justify-center bg-[#09090B] text-gray-200">
         <div className="flex flex-wrap justify-center  gap-6 p-6">
           {products.map((product) => {
@@ -103,6 +103,6 @@ export default function Home() {
         pauseOnHover
         theme="dark"
       />
-    </>
+    </ShoppingCartProvider>
   )
 }
