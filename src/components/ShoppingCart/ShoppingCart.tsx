@@ -88,11 +88,6 @@ export function ShoppingCart() {
                     <div className=" flex h-[56px] justify-start">
                       <Amount product={isProductAlreadyInCart} />
                     </div>
-
-                    {/* <ButtonRectangle
-                      title="Adicionar ao carrinho"
-                      onClick={() => addItemInShoppingCart(product)}
-                    /> */}
                   </div>
                 )
               }
@@ -134,7 +129,7 @@ export function ShoppingCart() {
         newestOnTop={false}
         closeOnClick
         rtl={false}
-        limit={5}
+        limit={2}
         pauseOnFocusLoss
         draggable
         pauseOnHover
