@@ -27,8 +27,8 @@ export function ButtonSquare({
   }
   return (
     <button
-      className={`rounded-lg border-2 p-2 
-      transition-all 
+      className={`rounded-lg border-2 p-2 transition-all
+      max-sm:p-1 
 
       ${
         variant === 'minus'

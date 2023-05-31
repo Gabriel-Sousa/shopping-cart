@@ -10,7 +10,7 @@ interface HeaderShoppingCartProps {
 export function HeaderShoppingCart({ onCloseModal }: HeaderShoppingCartProps) {
   const { productsInCart } = useShoppingCart()
   return (
-    <div className="flex h-[72px] items-center justify-between border-b-2 border-gray-400 px-8">
+    <div className="flex h-[8vh] items-center justify-between border-b-2 border-gray-400 px-8">
       <span className="text-xl font-medium text-gray-100">
         Seu carrinho tem
         <span className="font-semibold text-gray-200">

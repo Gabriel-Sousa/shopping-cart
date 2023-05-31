@@ -14,7 +14,7 @@ export function ShoppingCart() {
 
   return (
     <div
-      className={`fixed right-0 top-0 flex h-screen items-center  justify-center  text-gray-200
+      className={`fixed right-0 top-0 flex h-screen items-center justify-center text-gray-200
        ${isModalOpen ? 'open translate-x-0' : 'close translate-x-[93%] '}
 `}
     >
@@ -22,7 +22,7 @@ export function ShoppingCart() {
         onClick={changeStateModal}
         className="relative h-8 w-8 translate-x-4 rotate-45 bg-[#414146]"
       />
-      <div className="relative h-screen w-[480px]  bg-gray-500">
+      <div className="relative flex h-screen w-[356px] flex-col bg-gray-500 sm:w-[480px]">
         <HeaderShoppingCart onCloseModal={changeStateModal} />
         <ListShoppingCart />
         <FooterShoppingCart />

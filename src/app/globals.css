@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 
+
+
+body{
+  background-color: #09090B;
+}
 .shoppingCartScroll::-webkit-scrollbar {
   width: 8px; /* Largura da barra de rolagem */
   background-color: #09090B;

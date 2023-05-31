@@ -56,7 +56,7 @@ export function FooterShoppingCart() {
   }
 
   return (
-    <div className="h-[224px] border-t-2 border-gray-400 p-8">
+    <div className=" border-t-2 border-gray-400 p-8 ">
       <div className="mb-8 flex flex-col gap-4">
         <div className="flex justify-between leading-6">
           <span className="text-xl font-medium">Total:</span>
