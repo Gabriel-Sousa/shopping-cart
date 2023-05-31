@@ -34,14 +34,14 @@ export function Amount({ product }: AmountProps) {
     removeItemInShoppingCart(product.id)
   }
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3  max-sm:gap-10">
       <div className="flex items-center">
         <ButtonSquare
           variant="minus"
           currentAmount={product.amount}
           onClick={handleRemoveAmount}
         />
-        <span className="w-[46px] text-center font-bold leading-4 max-sm:w-[28px] sm:text-base">
+        <span className="w-[46px] text-center font-bold leading-4 max-sm:w-[52px] max-sm:text-lg">
           {product.amount}
         </span>
         <ButtonSquare
@@ -52,7 +52,7 @@ export function Amount({ product }: AmountProps) {
         />
       </div>
 
-      <button className="ml-4 max-sm:ml-1" onClick={handleDelete}>
+      <button className=" " onClick={handleDelete}>
         <Image src={`/assets/trash.svg`} alt="" width={28} height={28} />
       </button>
     </div>

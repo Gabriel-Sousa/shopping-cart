@@ -32,8 +32,8 @@ export function ItemShoppingCart({ product }: ItemShoppingCartProps) {
           {product.title.substring(0, 40)}
           {product.title.length > 40 && '...'}
         </h2>
-        <div className="flex  items-center justify-between">
-          <span className="text-sm font-bold leading-5 sm:text-base ">
+        <div className="flex items-center justify-between">
+          <span className="text-sm font-bold leading-5 max-sm:mr-4 sm:text-base">
             {priceFormatted(product.price)}
           </span>
 
