@@ -33,6 +33,10 @@ O Shopping Cart é uma aplicação fictícia na qual tem o objetivo criar um sis
 - [x] Soma de todos os produtos
 - [x] Possui notificações quando algo da errado ou da certo
 
+- [x] Versão web
+- [ ] Versão mobile
+
+
 
 <br>
 
