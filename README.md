@@ -36,6 +36,16 @@ O Shopping Cart é uma aplicação fictícia na qual tem o objetivo criar um sis
 - [x] Versão web
 - [ ] Versão mobile
 
+## 💲 Discount
+
+Cupons valido na aplicação são:
+
+- FREE
+- 10%
+- 50%
+- 55%
+- 75%
+- 90%
 
 
 <br>
