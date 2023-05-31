@@ -5,7 +5,7 @@ import { HeaderShoppingCart } from '@/components/ShoppingCart/HeaderShoppingCart
 import { ListShoppingCart } from '@/components/ShoppingCart/ListShoppingCart'
 import { useShoppingCart } from '@/hooks/useShoppingCart'
 
-export function ShoppingCart() {
+export function ShoppingCartModal() {
   const { isModalOpen, changeStateModal } = useShoppingCart()
   return (
     <div
