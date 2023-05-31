@@ -58,7 +58,7 @@ export function ItemShoppingCart({ product }: ItemShoppingCartProps) {
               currentAmount={product.amount}
               onClick={handleRemoveAmount}
             />
-            <span className="w-[46px] text-center font-bold leading-4 max-sm:w-[35px] sm:text-base">
+            <span className="w-[46px] text-center font-bold leading-4 max-sm:w-[28px] sm:text-base">
               {product.amount}
             </span>
             <ButtonSquare
