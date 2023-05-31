@@ -2,8 +2,7 @@
 
 import Image from 'next/image'
 import { priceFormatted } from '@/services/priceFormatted'
-import { useShoppingCart } from '@/hooks/useShoppingCart'
-import { ButtonSquare } from './ButtonSquare'
+import { Amount } from '../Amount'
 
 type Product = {
   id: string
@@ -19,21 +18,6 @@ interface ItemShoppingCartProps {
 }
 
 export function ItemShoppingCart({ product }: ItemShoppingCartProps) {
-  const { addAmount, removeAmount, removeItemInShoppingCart } =
-    useShoppingCart()
-
-  function handleAddAmount() {
-    addAmount(product.id)
-  }
-
-  function handleRemoveAmount() {
-    removeAmount(product.id)
-  }
-
-  function handleDelete() {
-    removeItemInShoppingCart(product.id)
-  }
-
   return (
     <li className="mb-12 flex  gap-5">
       <Image
@@ -52,25 +36,8 @@ export function ItemShoppingCart({ product }: ItemShoppingCartProps) {
           <span className="text-sm font-bold leading-5 sm:text-base ">
             {priceFormatted(product.price)}
           </span>
-          <div className="flex items-center">
-            <ButtonSquare
-              variant="minus"
-              currentAmount={product.amount}
-              onClick={handleRemoveAmount}
-            />
-            <span className="w-[46px] text-center font-bold leading-4 max-sm:w-[28px] sm:text-base">
-              {product.amount}
-            </span>
-            <ButtonSquare
-              variant="plus"
-              currentAmount={product.amount}
-              maxAmount={product.stockAmount}
-              onClick={handleAddAmount}
-            />
-            <button className="ml-4 max-sm:ml-1" onClick={handleDelete}>
-              <Image src={`/assets/trash.svg`} alt="" width={28} height={28} />
-            </button>
-          </div>
+
+          <Amount product={product} />
         </div>
       </div>
     </li>

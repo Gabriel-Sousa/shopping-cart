@@ -6,6 +6,8 @@ import { priceFormatted } from '@/services/priceFormatted'
 import { ButtonRectangle } from '@/components/ButtonRectangle'
 import { useShoppingCart } from '@/hooks/useShoppingCart'
 import { ShoppingCartModal } from './ShoppingCartModal'
+import { ToastContainer } from 'react-toastify'
+import { Amount } from '../Amount'
 
 export function ShoppingCart() {
   const products = [
@@ -48,7 +50,7 @@ export function ShoppingCart() {
     },
   ]
 
-  const { addItemInShoppingCart } = useShoppingCart()
+  const { addItemInShoppingCart, productsInCart } = useShoppingCart()
 
   return (
     <>
@@ -57,6 +59,44 @@ export function ShoppingCart() {
           {products.map((product) => {
             const title = product.title.substring(0, 40)
             const withElipse = product.title.length > 40
+
+            const isProductAlreadyInCart = productsInCart.find(
+              (productInCart) => productInCart.id === product.id,
+            )
+
+            if (isProductAlreadyInCart) {
+              if (isProductAlreadyInCart.amount! >= 1) {
+                return (
+                  <div
+                    key={product.id}
+                    className="flex w-[240px] flex-col gap-4 rounded-lg bg-gray-500 p-4"
+                  >
+                    <Image
+                      src={product.imageCover}
+                      alt=""
+                      width={256}
+                      height={256}
+                      className="rounded-lg"
+                    />
+                    <h2 title={product.title} className="h-[48px]">
+                      {title}
+                      <span>{withElipse && '...'}</span>
+                    </h2>
+                    <div className="text-xl font-bold leading-6">
+                      {priceFormatted(product.price)}
+                    </div>
+                    <div className=" flex h-[56px] justify-start">
+                      <Amount product={isProductAlreadyInCart} />
+                    </div>
+
+                    {/* <ButtonRectangle
+                      title="Adicionar ao carrinho"
+                      onClick={() => addItemInShoppingCart(product)}
+                    /> */}
+                  </div>
+                )
+              }
+            }
 
             return (
               <div
@@ -77,6 +117,7 @@ export function ShoppingCart() {
                 <div className="text-xl font-bold leading-6">
                   {priceFormatted(product.price)}
                 </div>
+
                 <ButtonRectangle
                   title="Adicionar ao carrinho"
                   onClick={() => addItemInShoppingCart(product)}
@@ -86,6 +127,19 @@ export function ShoppingCart() {
           })}
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        limit={5}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <ShoppingCartModal />
     </>
   )
