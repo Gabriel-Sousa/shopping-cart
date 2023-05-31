@@ -48,9 +48,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProp) {
   useEffect(() => {
     const body = document.getElementById('body')
     if (isModalOpen) {
-      body?.classList.add('overflow-hidden')
+      body?.classList.add('scroll-lock')
     } else {
-      body?.classList.remove('overflow-hidden')
+      body?.classList.remove('scroll-lock')
     }
   }, [isModalOpen])
 

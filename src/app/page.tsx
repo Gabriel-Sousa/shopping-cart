@@ -56,7 +56,7 @@ export default function Home() {
   return (
     <ShoppingCartProvider>
       <div className="flex items-center justify-center bg-[#09090B] text-gray-200">
-        <div className="flex flex-wrap justify-center  gap-6 p-6">
+        <div className="flex flex-wrap justify-center gap-6 p-6">
           {products.map((product) => {
             const title = product.title.substring(0, 40)
             const withElipse = product.title.length > 40

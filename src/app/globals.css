@@ -2,12 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
 body{
   background-color: #09090B;
 }
+
+.scroll-lock{
+  overflow: hidden;
+}
+
 .shoppingCartScroll::-webkit-scrollbar {
   width: 8px; /* Largura da barra de rolagem */
   background-color: #09090B;
